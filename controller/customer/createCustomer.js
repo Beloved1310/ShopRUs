@@ -1,12 +1,10 @@
-const Customer = require('../../models/Customer');
+const Customer = require('../../Model/Customer');
 
 module.exports = async (req, res) => {
-  const { fullname, email, password, isVendor, location, business } = req.body;
+  const { name, role } = req.body;
   const createdCustomer = new Customer({
-    fullname,
-    email,
-    password,
-    gender,
+    name,
+    role
   });
 
   //   const user = await User.findOne({ email });
@@ -14,7 +12,7 @@ module.exports = async (req, res) => {
   //   const salt = await bcrypt.genSalt(10);
   //   createdUser.password = await bcrypt.hash(createdUser.password, salt);
   await createdCustomer.save();
-  const data = { fullname, email, password, gender };
+  const data = {name, role };
   return res.send({
     data,
   });

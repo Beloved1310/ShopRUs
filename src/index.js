@@ -1,15 +1,17 @@
 const express = require('express')
-const cors = require('cors')
+const sequelize = require('../database/Sequelize')
 require('dotenv').config()
-const debug = require('debug')('app')
-const { PORT } = require('./config')
+const { PORT } = require('../config')
 
 const app = express()
-require('./startup/db')()
+sequelize.sync().then(()=>{
+  console.log('Database is ready')
+})
 
-const user = require('./routes/user')
-const foodMenu = require('./routes/foodMenu')
-const order = require('./routes/order')
+const customer = require('../routes/customer')
+const discount = require('../routes/discount')
+const invoice = require('../routes/invoice')
+
 
 process.on('unhandledRejection', (err) => {
   debug(err, 'Unhandled Rejection at Promise')
@@ -20,16 +22,18 @@ process.on('uncaughtException', (err) => {
   process.exit(1)
 })
 
-app.use(cors({ origin: '*' }))
+
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: '50mb' }))
 
 app.use('/', customer)
-app.use('/menu', foodMenu)
-app.use('/order', order)
+app.use('/discount', discount)
+app.use('/invoice', invoice)
 
 
 app.listen(PORT, () => {
-  debug(`Web server is running ${PORT}`)
+  console.log(`Web server is running ${PORT}`)
 })
+
+module.exports = app;

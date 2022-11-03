@@ -1,16 +1,17 @@
 const express = require('express');
 
+const asyncMiddleware = require('../middleware/async');
 
 const router = express.Router();
 
-const addDiscount = require('../controller/user/createDiscount');
-const getAllDiscounts = require('../controller/user/getAllDiscounts');
-const getDiscountPercentage = require('../controller/user/getDiscountByName');
+const addDiscount = require('../controller/discount/addDiscount');
+const getAllDiscounts = require('../controller/discount/getAllDiscounts');
+const getDiscountPercentage = require('../controller/discount/getDiscountPercentage');
 
-router.get('/getDiscountPercentage', asyncMiddleware(getDiscountPercentage));
+router.get('/getDiscountPercentage/:discountType', asyncMiddleware(getDiscountPercentage));
 router.get('/getAllDiscounts', asyncMiddleware(getAllDiscounts));
 
-router.post('/createDiscount', asyncMiddleware(addDiscount));
+router.post('/addDiscount', asyncMiddleware(addDiscount));
 
 
 
