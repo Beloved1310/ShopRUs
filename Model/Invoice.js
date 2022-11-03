@@ -1,32 +1,35 @@
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../database/Sequelize");
 
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database/Sequelize')
-
-class Invoice extends Model{
-    static associate(models) {
-        // define association here
-        this.customerId = this.belongsTo(models.Customer, {foreignKey: 'customer_id'});
-      }
+class Invoice extends Model {
+  static associate(models) {
+    // define association here
+    this.customerId = this.belongsTo(models.Customer, {
+      foreignKey: "customer_id",
+    });
+  }
 }
 
-Invoice.init({    
+Invoice.init(
+  {
     products: [
       {
         name: DataTypes.STRING,
-        price: DataTypes.INTEGER,
-        quantity: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
     ],
     customerId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Customer',
-        key: 'id',
+        model: "Customer",
+        key: "id",
       },
     },
-}, {
+  },
+  {
     sequelize,
-    modelName: 'Invoice'
-})
+    modelName: "Invoice",
+  }
+);
 
-module.exports = Invoice
+module.exports = Invoice;

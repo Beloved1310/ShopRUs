@@ -30,7 +30,7 @@ const db = [
   },
 ];
 // Discount % = (Discount/List Price) × 100.
-// console.log(Cusomers.role)
+
 module.exports = async (req, res) => {
   const { bill } = req.params;
   let discount, data;
@@ -39,22 +39,18 @@ module.exports = async (req, res) => {
     console.log(val, "hhhh");
 
     if (val["customerId"]["role"] === "afflilate") {
-      console.log(val["customerId"]["role"], "bbbbbbbbbbbbb");
       const discountValue = await Discount.findOne({
         where: { discountType: val["customerId"]["role"] },
       });
-      console.log(discountValue["discountPercentage"], "xxx");
       discount = (discountValue["discountPercentage"] / bill) * 100;
       data = discount;
       return res.send({ message: "Customers", data });
     }
 
     if (val["customerId"]["role"] === "employee") {
-      console.log(val["customerId"]["role"], "bbbbbbbbbbbbb");
       const discountValue = await Discount.findOne({
         where: { discountType: val["customerId"]["role"] },
       });
-      console.log(discountValue["discountPercentage"], "xxx");
       discount = (discountValue["discountPercentage"] / bill) * 100;
       return res.send({ message: "Customers", data });
     }
