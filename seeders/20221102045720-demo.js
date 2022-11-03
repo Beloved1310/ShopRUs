@@ -3,9 +3,8 @@
 
 const Sequelize = require('../database/Sequelize')
 
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface, sequelize) => {
     await queryInterface.createTable(
       'Customer',
       [
@@ -83,15 +82,15 @@ module.exports = {
     );
   },
 
-//   down: async (queryInterface, Sequelize) => {
-//     /**
-//      * Add commands to revert seed here.
-//      *
-//      * Example:
-//      * await queryInterface.bulkDelete('People', null, {});
-//      */
-//     await queryInterface.bulkDelete('channel', null, bulkDeleteOptions);
-//     await queryInterface.bulkDelete('video', null, bulkDeleteOptions);
-//     await queryInterface.bulkDelete('user', null, bulkDeleteOptions);
-//   },
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+    await queryInterface.bulkDelete('channel', null, bulkDeleteOptions);
+    await queryInterface.bulkDelete('video', null, bulkDeleteOptions);
+    await queryInterface.bulkDelete('user', null, bulkDeleteOptions);
+  },
 };

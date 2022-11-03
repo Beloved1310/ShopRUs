@@ -1,22 +1,22 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database/Sequelize')
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../database/Sequelize");
 
-class Discount extends Model{
+class Discount extends Model {}
 
-}
-
-Discount.init({    
-    discountType:{
-        type: DataTypes.STRING,
-        allowNull: false
-
+Discount.init(
+  {
+    discountType: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    discountPercentage:{
-        type: DataTypes.INTEGER
+    discountPercentage: {
+      type: DataTypes.INTEGER,
     },
-}, {
+  },
+  {
     sequelize,
-    modelName: 'Discount'
-})
+    modelName: "Discount",
+  }
+);
 
-module.exports = Discount
+module.exports = Discount;
